@@ -1,0 +1,25 @@
+{
+  "protocolVersion": "2025-03-26",
+  "transport": { "kind": "streamableHttp", "path": "/mcp" },
+  "capabilities": { "tools": { "listChanged": true } },
+  "tools": [
+    {
+      "name": "run_subtask",
+      "description": "Executes a delegated subtask on behalf of a calling agent and returns a short completion result. In a multi-agent workflow each agent calls this tool and may in turn spawn further sub-agents that call it again, forming a delegation chain; the Delegation Depth and Sub-Agent Spawn Limiter policy inspects the delegation header on every call and blocks the chain once it grows too deep or spawns too many sub-agents.",
+      "inputSchema": {
+        "type": "object",
+        "required": ["taskDescription"],
+        "properties": {
+          "taskDescription": { "type": "string", "description": "A human-readable description of the subtask the agent is delegating for execution." }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["resultSummary"],
+        "properties": {
+          "resultSummary": { "type": "string", "description": "A short summary of the completed subtask result returned to the calling agent." }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+# --- Rust / PDK build artifacts ---
+target/
+**/target/
+.pdk/
+**/.pdk/
+
+# --- PDK playground secrets ---
+registration.yaml
+certificate.yaml
+**/playground/config/registration.yaml
+**/playground/config/certificate.yaml
+**/playground/config/custom-policies/*
+!**/playground/config/custom-policies/note.txt
+
+# --- Anypoint / Exchange caches & credential material ---
+.exchange/
+**/.exchange/
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+
+# --- Environment / secret files ---
+.env
+.env.*
+*.secret
+secrets.json
+**/config.local.json
+demo/env.local.sh
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# --- OS / editor noise ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

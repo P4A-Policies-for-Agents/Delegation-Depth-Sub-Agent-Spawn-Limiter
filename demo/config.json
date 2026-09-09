@@ -1,0 +1,7 @@
+{
+  "maxDepth": 3,
+  "maxFanout": 4,
+  "windowMillis": 60000,
+  "headerName": "x-agent-delegation",
+  "onExceed": "reject"
+}

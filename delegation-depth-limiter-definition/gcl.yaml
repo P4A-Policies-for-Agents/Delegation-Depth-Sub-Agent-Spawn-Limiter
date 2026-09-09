@@ -1,0 +1,51 @@
+---
+apiVersion: gateway.mulesoft.com/v1alpha1
+kind: Extension
+metadata:
+  labels:
+    title: Delegation Depth & Sub-Agent Spawn Limiter
+    category: Security
+    description: >-
+      Enforces a hard ceiling on delegation depth and sub-agent fan-out across
+      multi-agent MCP chains; rejects MCP tools/call that exceed the configured
+      depth or spawn width. Guards against runaway agent subcontracting.
+    metadata/interfaceScope: api
+    metadata/capabilities/assetTypes: mcp
+spec:
+  extends:
+    - name: extension-definition
+      namespace: default
+  properties:
+    maxDepth:
+      type: integer
+      description: >-
+        Maximum delegation depth allowed. A call whose header depth exceeds this
+        is rejected. 0 = only root calls (no delegation) allowed.
+      default: 5
+      minimum: 0
+    maxFanout:
+      type: integer
+      description: >-
+        Maximum distinct sub-agents a single root chain may spawn within the
+        window. 0 disables fan-out enforcement.
+      default: 10
+      minimum: 0
+    windowMillis:
+      type: integer
+      description: Rolling window (ms) over which distinct sub-agents per root are counted.
+      default: 60000
+      minimum: 1000
+    headerName:
+      type: string
+      description: >-
+        Request header carrying the delegation context as JSON
+        {"root","depth","agent","parent"}. Absent header = a root call (depth 0).
+      default: "x-agent-delegation"
+    onExceed:
+      type: string
+      description: Action when a limit is exceeded — reject the call or only report it.
+      enum:
+        - reject
+        - report
+      default: reject
+  required: []
