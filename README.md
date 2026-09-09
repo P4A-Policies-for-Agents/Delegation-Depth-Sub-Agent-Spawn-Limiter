@@ -115,8 +115,8 @@ Non-`tools/call` methods (`initialize`, `tools/list`, notifications) pass throug
 ## Repository layout
 
 ```
-delegation-depth-limiter-definition/   # gcl.yaml (schema), exchange.json, Makefile
-delegation-depth-limiter-flex/          # Rust implementation
+delegation-depth-sub-agent-spawn-limiter-definition/   # gcl.yaml (schema), exchange.json, Makefile
+delegation-depth-sub-agent-spawn-limiter-flex/          # Rust implementation
   src/lib.rs         # entrypoint (injects DataStorageBuilder) + inbound filter
   src/delegation.rs  # PURE: header parse + depth check + distinct fan-out — unit tested
   src/generated/     # config.rs generated from gcl.yaml
@@ -135,8 +135,8 @@ demo/
 ## Build, test & release
 
 ```bash
-cd delegation-depth-limiter-definition && make release   # publish definition
-cd ../delegation-depth-limiter-flex
+cd delegation-depth-sub-agent-spawn-limiter-definition && make release   # publish definition
+cd ../delegation-depth-sub-agent-spawn-limiter-flex
 make build-asset-files
 cargo build --target wasm32-wasip1 --release
 cargo test --lib            # 6 pure unit tests (parse, depth ceiling, distinct fan-out)
